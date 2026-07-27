@@ -1,0 +1,12 @@
+.git
+.idea
+.vscode
+.cursor
+.windsurf
+.agents
+**/node_modules
+**/target
+**/.next
+*.log
+uploads
+graphify-out

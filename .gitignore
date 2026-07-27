@@ -74,6 +74,7 @@ AGENTS.md
 .windsurf/
 *.md
 skills-lock.json
+graphify-out/
 
 # Upload path
 uploads/
