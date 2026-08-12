@@ -20,5 +20,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class ProductCarouselComponentDTO extends ComponentDTO {
     private String title;
+    private String subtitle;
+
     private List<String> productCodes;
 }

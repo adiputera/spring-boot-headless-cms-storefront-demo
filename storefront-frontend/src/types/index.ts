@@ -1,5 +1,4 @@
-// Component Types
-export type ComponentType = 'BANNER' | 'PARAGRAPH' | 'PRODUCT_CAROUSEL' | 'NAVIGATION' | 'QUICK_MENU' | 'PRODUCT_DETAIL' | 'LATEST_ARTICLE' | 'TRENDING_ARTICLE' | 'LATEST_EVENT' | 'TOP_EVENT';
+export type ComponentType = 'BANNER' | 'PARAGRAPH' | 'PRODUCT_CAROUSEL' | 'NAVIGATION' | 'QUICK_MENU' | 'PRODUCT_DETAIL' | 'LATEST_ARTICLE' | 'TRENDING_ARTICLE' | 'LATEST_EVENT' | 'TOP_EVENT' | 'QUOTE_OF_THE_DAY';
 
 // Base Component Interface
 export interface BaseComponent {
@@ -32,6 +31,7 @@ export interface ParagraphComponent extends BaseComponent {
 export interface ProductCarouselComponent extends BaseComponent {
   type: 'PRODUCT_CAROUSEL';
   title: string;
+  subtitle?: string;
   productCodes?: string[] | string;
 }
 
@@ -87,6 +87,13 @@ export interface TopEventComponent extends BaseComponent {
   eventSlug: string;
 }
 
+// Quote of the Day Component
+export interface QuoteOfTheDayComponent extends BaseComponent {
+  type: 'QUOTE_OF_THE_DAY';
+  title: string;
+  quote: string;
+}
+
 // Article Interface
 export interface Article {
   id: number;
@@ -116,7 +123,8 @@ export type Component =
   | LatestArticleComponent
   | TrendingArticleComponent
   | LatestEventComponent
-  | TopEventComponent;
+  | TopEventComponent
+  | QuoteOfTheDayComponent;
 
 // Product Interface
 export interface Product {

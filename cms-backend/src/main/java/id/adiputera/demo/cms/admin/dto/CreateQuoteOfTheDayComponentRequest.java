@@ -5,20 +5,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-/**
- * Create Product Carousel Component Request class.
- *
- * @author Yusuf F. Adiputera
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class CreateProductCarouselComponentRequest extends CreateComponentRequest {
+public class CreateQuoteOfTheDayComponentRequest extends CreateComponentRequest {
     private String title;
-    private String subtitle;
-
-    private List<String> productCodes;
+    private String quote;
 }

@@ -9,6 +9,7 @@ import LatestArticleComponent from '@/components/cms/LatestArticleComponent';
 import TrendingArticleComponent from '@/components/cms/TrendingArticleComponent';
 import LatestEventComponent from '@/components/cms/LatestEventComponent';
 import TopEventComponent from '@/components/cms/TopEventComponent';
+import QuoteOfTheDayComponent from '@/components/cms/QuoteOfTheDayComponent';
 
 const componentRegistry = {
   BANNER: BannerComponent,
@@ -21,6 +22,7 @@ const componentRegistry = {
   TRENDING_ARTICLE: TrendingArticleComponent,
   LATEST_EVENT: LatestEventComponent,
   TOP_EVENT: TopEventComponent,
+  QUOTE_OF_THE_DAY: QuoteOfTheDayComponent,
 };
 
 interface ComponentRendererProps {

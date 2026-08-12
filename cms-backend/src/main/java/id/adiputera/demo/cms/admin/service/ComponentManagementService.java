@@ -12,6 +12,7 @@ import id.adiputera.demo.cms.admin.dto.CreateParagraphComponentRequest;
 import id.adiputera.demo.cms.admin.dto.CreateProductCarouselComponentRequest;
 import id.adiputera.demo.cms.admin.dto.CreateProductDetailComponentRequest;
 import id.adiputera.demo.cms.admin.dto.CreateQuickMenuComponentRequest;
+import id.adiputera.demo.cms.admin.dto.CreateQuoteOfTheDayComponentRequest;
 import id.adiputera.demo.cms.admin.dto.CreateTopEventComponentRequest;
 import id.adiputera.demo.cms.admin.dto.CreateTrendingArticleComponentRequest;
 import id.adiputera.demo.cms.admin.dto.ReorderComponentRequest;
@@ -33,6 +34,7 @@ import id.adiputera.demo.cms.entity.component.ParagraphComponent;
 import id.adiputera.demo.cms.entity.component.ProductCarouselComponent;
 import id.adiputera.demo.cms.entity.component.ProductDetailComponent;
 import id.adiputera.demo.cms.entity.component.QuickMenuComponent;
+import id.adiputera.demo.cms.entity.component.QuoteOfTheDayComponent;
 import id.adiputera.demo.cms.entity.component.TopEventComponent;
 import id.adiputera.demo.cms.entity.component.TrendingArticleComponent;
 import id.adiputera.demo.cms.mapper.EntityMapper;
@@ -298,6 +300,9 @@ public class ComponentManagementService {
             case "TOP_EVENT":
                 component = createTopEventComponent(request);
                 break;
+            case "QUOTE_OF_THE_DAY":
+                component = createQuoteOfTheDayComponent(request);
+                break;
             default:
                 throw new BadRequestException("Unknown component type: " + request.getType());
         }
@@ -340,6 +345,8 @@ public class ComponentManagementService {
             updateTrendingArticleComponent(trendingArticle, req);
         } else if (existing instanceof TopEventComponent topEvent && request instanceof CreateTopEventComponentRequest req) {
             updateTopEventComponent(topEvent, req);
+        } else if (existing instanceof QuoteOfTheDayComponent quoteComp && request instanceof CreateQuoteOfTheDayComponentRequest req) {
+            updateQuoteOfTheDayComponent(quoteComp, req);
         }
     }
 
@@ -623,5 +630,18 @@ public class ComponentManagementService {
     private void updateTopEventComponent(TopEventComponent topEvent, CreateTopEventComponentRequest req) {
         topEvent.setTitle(req.getTitle());
         topEvent.setEventSlug(req.getEventSlug());
+    }
+
+    private QuoteOfTheDayComponent createQuoteOfTheDayComponent(CreateComponentRequest request) {
+        CreateQuoteOfTheDayComponentRequest req = (CreateQuoteOfTheDayComponentRequest) request;
+        QuoteOfTheDayComponent component = new QuoteOfTheDayComponent();
+        component.setTitle(req.getTitle());
+        component.setQuote(req.getQuote());
+        return component;
+    }
+
+    private void updateQuoteOfTheDayComponent(QuoteOfTheDayComponent component, CreateQuoteOfTheDayComponentRequest req) {
+        if (req.getTitle() != null) component.setTitle(req.getTitle());
+        if (req.getQuote() != null) component.setQuote(req.getQuote());
     }
 }

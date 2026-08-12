@@ -12,6 +12,7 @@ import id.adiputera.demo.cms.dto.ProductCarouselComponentDTO;
 import id.adiputera.demo.cms.dto.ProductDTO;
 import id.adiputera.demo.cms.dto.ProductDetailComponentDTO;
 import id.adiputera.demo.cms.dto.QuickMenuComponentDTO;
+import id.adiputera.demo.cms.dto.QuoteOfTheDayComponentDTO;
 import id.adiputera.demo.cms.dto.SlotDTO;
 import id.adiputera.demo.cms.dto.TopEventComponentDTO;
 import id.adiputera.demo.cms.dto.TrendingArticleComponentDTO;
@@ -27,6 +28,7 @@ import id.adiputera.demo.cms.entity.component.ParagraphComponent;
 import id.adiputera.demo.cms.entity.component.ProductCarouselComponent;
 import id.adiputera.demo.cms.entity.component.ProductDetailComponent;
 import id.adiputera.demo.cms.entity.component.QuickMenuComponent;
+import id.adiputera.demo.cms.entity.component.QuoteOfTheDayComponent;
 import id.adiputera.demo.cms.entity.component.TopEventComponent;
 import id.adiputera.demo.cms.entity.component.TrendingArticleComponent;
 import org.springframework.stereotype.Component;
@@ -173,6 +175,7 @@ public class EntityMapper {
             case TRENDING_ARTICLE -> toTrendingArticleComponentDTO((TrendingArticleComponent) component);
             case LATEST_EVENT -> toLatestEventComponentDTO((LatestEventComponent) component);
             case TOP_EVENT -> toTopEventComponentDTO((TopEventComponent) component);
+            case QUOTE_OF_THE_DAY -> toQuoteOfTheDayComponentDTO((QuoteOfTheDayComponent) component);
         };
     }
 
@@ -275,7 +278,9 @@ public class EntityMapper {
                 .name(component.getName())
                 .type(component.getType().name())
                 .title(component.getTitle())
+                .subtitle(component.getSubtitle())
                 .productCodes(productCodes)
+
                 .build();
     }
 
@@ -376,11 +381,22 @@ public class EntityMapper {
     }
 
     /**
-     * Maps a Product entity to a ProductDTO.
+     * Maps a QuoteOfTheDayComponent entity to its DTO representation.
      *
-     * @param product The Product entity to map.
-     * @return The mapped ProductDTO, or null if input product is null.
+     * @param component The QuoteOfTheDayComponent entity.
+     * @return The mapped QuoteOfTheDayComponentDTO, or null if input is null.
      */
+    private QuoteOfTheDayComponentDTO toQuoteOfTheDayComponentDTO(QuoteOfTheDayComponent component) {
+        if (component == null) return null;
+        return QuoteOfTheDayComponentDTO.builder()
+                .id(component.getId())
+                .uid(component.getUid())
+                .name(component.getName())
+                .type(component.getType().name())
+                .title(component.getTitle())
+                .quote(component.getQuote())
+                .build();
+    }
     public ProductDTO toProductDTO(Product product) {
         if (product == null) {
             return null;

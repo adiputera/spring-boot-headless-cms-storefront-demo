@@ -1,8 +1,9 @@
 package id.adiputera.demo.cms.dto;
 
-import id.adiputera.demo.cms.entity.ComponentType;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
@@ -12,15 +13,12 @@ import java.util.List;
  *
  * @author Yusuf F. Adiputera
  */
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @SuperBuilder
 public class LatestEventComponentDTO extends ComponentDTO {
     private String title;
     private List<String> eventSlugs;
-
-    public LatestEventComponentDTO() {
-        super();
-        this.setType(ComponentType.LATEST_EVENT.name());
-    }
 }

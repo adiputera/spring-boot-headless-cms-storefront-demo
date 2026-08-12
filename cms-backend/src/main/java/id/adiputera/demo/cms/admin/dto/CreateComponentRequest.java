@@ -27,7 +27,8 @@ import lombok.NoArgsConstructor;
     @JsonSubTypes.Type(value = CreateLatestArticleComponentRequest.class, name = "LATEST_ARTICLE"),
     @JsonSubTypes.Type(value = CreateTrendingArticleComponentRequest.class, name = "TRENDING_ARTICLE"),
     @JsonSubTypes.Type(value = CreateLatestEventComponentRequest.class, name = "LATEST_EVENT"),
-    @JsonSubTypes.Type(value = CreateTopEventComponentRequest.class, name = "TOP_EVENT")
+    @JsonSubTypes.Type(value = CreateTopEventComponentRequest.class, name = "TOP_EVENT"),
+    @JsonSubTypes.Type(value = CreateQuoteOfTheDayComponentRequest.class, name = "QUOTE_OF_THE_DAY")
 })
 public abstract class CreateComponentRequest {
     

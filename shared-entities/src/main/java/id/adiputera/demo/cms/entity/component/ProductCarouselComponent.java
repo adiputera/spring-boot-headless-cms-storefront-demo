@@ -37,6 +37,12 @@ public class ProductCarouselComponent extends Component {
     @CmsField(displayName = "Carousel Title", type = CmsFieldType.STRING, required = true, placeholder = "Featured Products")
     private String title;
 
+    @Size(max = 255)
+    @Column(name = "subtitle")
+    @CmsField(displayName = "Carousel Subtitle", type = CmsFieldType.STRING, required = false, placeholder = "Featured Products Subtitle")
+    private String subtitle;
+
+
     @Column(name = "product_codes", columnDefinition = "TEXT")
     @CmsField(displayName = "Products", type = CmsFieldType.REFERENCE, targetEntity = Product.class, cardinality = ReferenceCardinality.MULTIPLE, required = true, placeholder = "Select products...")
     private String productCodes; // Comma-separated list of product IDs

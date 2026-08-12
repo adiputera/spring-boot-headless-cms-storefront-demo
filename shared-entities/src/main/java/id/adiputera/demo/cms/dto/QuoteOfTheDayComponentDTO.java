@@ -6,19 +6,12 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.List;
-
-/**
- * Trending Article Component D T O class.
- *
- * @author Yusuf F. Adiputera
- */
 @Data
-@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
-public class TrendingArticleComponentDTO extends ComponentDTO {
+@EqualsAndHashCode(callSuper = true)
+public class QuoteOfTheDayComponentDTO extends ComponentDTO {
     private String title;
-    private List<String> articleSlugs;
+    private String quote;
 }

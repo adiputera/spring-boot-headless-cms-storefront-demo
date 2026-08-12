@@ -32,6 +32,7 @@ export interface ParagraphComponent extends BaseComponent {
 export interface ProductCarouselComponent extends BaseComponent {
   type: 'PRODUCT_CAROUSEL';
   title: string;
+  subtitle?: string;
   productCodes: string[] | string;
 }
 
