@@ -7,6 +7,9 @@ interface PageProps {
   params: Promise<{
     slug: string[];
   }>;
+  searchParams: Promise<{
+    edit?: string;
+  }>;
 }
 
 // Generate metadata for SEO
@@ -42,18 +45,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-export default async function DynamicPage({ params }: PageProps) {
+export default async function DynamicPage({ params, searchParams }: PageProps) {
   const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
   const slug = '/' + (resolvedParams.slug ? resolvedParams.slug.join('/') : '');
+  const isEdit = resolvedSearchParams?.edit === 'true';
   
   try {
-    const page = await apiClient.getPageBySlug(slug);
+    const page = await apiClient.getPageBySlug(slug, isEdit);
     
     // Fetch slot details if slots exist
     let slotsWithComponents = page.slots || [];
     if (page.slots && page.slots.length > 0) {
       const slotIds = page.slots.map(slot => slot.id);
-      const { slots } = await apiClient.getSlotsByIds(slotIds);
+      const { slots } = await apiClient.getSlotsByIds(slotIds, isEdit);
       
       // Maintain the order defined by page.slots
       const slotsMap = new Map(slots.map(s => [s.id, s]));

@@ -13,7 +13,12 @@ export default function SlotRenderer({ slot, className = '', product }: SlotRend
   }
 
   return (
-    <div className={`slot slot-${slot.code} ${className}`} data-slot-id={slot.id}>
+    <div 
+      className={`slot slot-${slot.code} ${className}`} 
+      data-cms-slot={slot.id}
+      data-cms-slot-name={slot.name}
+      data-cms-sync-status={slot.syncStatus}
+    >
       {slot.components
         .sort((a, b) => a.sortOrder - b.sortOrder)
         .map((component) => (

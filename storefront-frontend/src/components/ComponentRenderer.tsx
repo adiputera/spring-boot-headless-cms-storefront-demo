@@ -38,5 +38,9 @@ export default function ComponentRenderer({ component, product }: ComponentRende
     return null;
   }
 
-  return <ComponentToRender {...component} product={product} />;
+  return (
+    <div data-cms-component={component.id} data-cms-sync-status={component.syncStatus} className="cms-component-wrapper w-full">
+      <ComponentToRender {...component} product={product} />
+    </div>
+  );
 }

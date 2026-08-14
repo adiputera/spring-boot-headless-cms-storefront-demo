@@ -30,12 +30,13 @@ public class SlotService {
      * Retrieves a list of slot DTOs with their components by their IDs.
      *
      * @param slotIds The list of slot IDs to retrieve.
+     * @param isEdit True if fetching for live edit (disables caching).
      * @return A list of mapped SlotDTO objects.
      */
-    @Cacheable(value = "slots", key = "#slotIds.toString()")
+    @Cacheable(value = "slots", key = "#slotIds.toString()", condition = "!#isEdit")
     @Transactional(readOnly = true)
-    public List<SlotDTO> getSlotsByIds(List<Long> slotIds) {
-        log.debug("Fetching slots with IDs: {}", slotIds);
+    public List<SlotDTO> getSlotsByIds(List<Long> slotIds, boolean isEdit) {
+        log.debug("Fetching slots with IDs: {}, edit: {}", slotIds, isEdit);
 
         if (slotIds == null || slotIds.isEmpty()) {
             return List.of();

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -26,14 +27,16 @@ public class PageController {
     private final PageService pageService;
 
     @GetMapping("/{slug}")
-    public ResponseEntity<PageDTO> getPageBySlug(@PathVariable("slug") String slug) {
-        log.info("GET /api/pages/{}", slug);
+    public ResponseEntity<PageDTO> getPageBySlug(
+            @PathVariable("slug") String slug,
+            @RequestParam(name = "edit", defaultValue = "false") boolean isEdit) {
+        log.info("GET /api/pages/{}?edit={}", slug, isEdit);
 
         // Normalize slug to match database format (with leading slash)
         String normalizedSlug = slug.isEmpty() || slug.equals("index") ? "/" : 
             slug.startsWith("/") ? slug : "/" + slug;
 
-        PageDTO page = pageService.getPageBySlug(normalizedSlug);
+        PageDTO page = pageService.getPageBySlug(normalizedSlug, isEdit);
         return ResponseEntity.ok(page);
     }
 }

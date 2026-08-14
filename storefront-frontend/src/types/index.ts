@@ -6,6 +6,7 @@ export interface BaseComponent {
   id: number;
   uid: string;
   name: string;
+  syncStatus?: string;
   sortOrder: number;
 }
 
@@ -131,6 +132,7 @@ export interface Product {
   id: number;
   code: string;
   name: string;
+  syncStatus?: string;
   imageUrl: string;
   price: number;
   description: string;
@@ -147,6 +149,7 @@ export interface Slot {
   id: number;
   code: string;
   name: string;
+  syncStatus?: string;
   components: Component[];
 }
 

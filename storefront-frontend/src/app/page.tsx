@@ -33,15 +33,21 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default async function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ edit?: string }>;
+}) {
   try {
-    const page = await apiClient.getPageBySlug('/');
+    const resolvedSearchParams = await searchParams;
+    const isEdit = resolvedSearchParams?.edit === 'true';
+    const page = await apiClient.getPageBySlug('/', isEdit);
     
     // Fetch slot details if slots exist
     let slotsWithComponents = page.slots || [];
     if (page.slots && page.slots.length > 0) {
       const slotIds = page.slots.map(slot => slot.id);
-      const { slots } = await apiClient.getSlotsByIds(slotIds);
+      const { slots } = await apiClient.getSlotsByIds(slotIds, isEdit);
       
       // Maintain the order defined by page.slots
       const slotsMap = new Map(slots.map(s => [s.id, s]));

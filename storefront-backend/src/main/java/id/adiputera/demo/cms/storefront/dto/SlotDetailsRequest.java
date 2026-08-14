@@ -18,4 +18,5 @@ import java.util.List;
 @AllArgsConstructor
 public class SlotDetailsRequest {
     private List<Long> slotIds;
+    private boolean isEdit;
 }

@@ -83,6 +83,12 @@ export default async function PagesListPage() {
                         Manage Content
                       </Link>
                       <Link
+                        href={`/cms/pages/${page.id}/live-edit`}
+                        className="text-green-600 hover:text-green-800 font-semibold"
+                      >
+                        Live Edit
+                      </Link>
+                      <Link
                         href={`/cms/pages/${page.id}/edit`}
                         className="text-gray-600 hover:text-gray-800"
                       >

@@ -55,9 +55,10 @@ export default function CMSLayout({
 
         {/* Sidebar */}
         <aside
-          className={`fixed md:relative inset-y-0 left-0 z-40 w-64 bg-white md:bg-transparent shadow-xl md:shadow-none p-4 md:p-0 transform ${
+          className={`fixed md:sticky inset-y-0 left-0 z-40 w-64 bg-white md:bg-transparent shadow-xl md:shadow-none p-4 md:p-0 transform ${
             isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-          } md:translate-x-0 transition-transform duration-300 ease-in-out md:flex-shrink-0 flex flex-col h-full md:h-auto`}
+          } md:translate-x-0 transition-transform duration-300 ease-in-out md:flex-shrink-0 flex flex-col h-full md:h-auto md:top-24`}
+          style={{ maxHeight: 'calc(100vh - 6rem)' }}
         >
           {/* Mobile Sidebar Close Header */}
           <div className="flex justify-between items-center mb-6 md:hidden border-b pb-3">

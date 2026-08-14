@@ -33,10 +33,10 @@ public class SlotController {
     @PostMapping("/details")
     public ResponseEntity<SlotDetailsResponse> getSlotDetails(
             @Valid @RequestBody SlotDetailsRequest request) {
-        log.info("POST /api/slots/details with {} slot IDs", 
-                 request.getSlotIds() != null ? request.getSlotIds().size() : 0);
+        log.info("POST /api/slots/details with {} slot IDs, edit: {}",
+                 request.getSlotIds() != null ? request.getSlotIds().size() : 0, request.isEdit());
 
-        List<SlotDTO> slots = slotService.getSlotsByIds(request.getSlotIds());
+        List<SlotDTO> slots = slotService.getSlotsByIds(request.getSlotIds(), request.isEdit());
 
         SlotDetailsResponse response = SlotDetailsResponse.builder()
                 .slots(slots)

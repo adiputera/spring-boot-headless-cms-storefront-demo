@@ -1,6 +1,7 @@
 package id.adiputera.demo.cms.storefront.service;
 
 import id.adiputera.demo.cms.dto.PageDTO;
+import id.adiputera.demo.cms.entity.CatalogVersion;
 import id.adiputera.demo.cms.entity.Page;
 import id.adiputera.demo.cms.mapper.EntityMapper;
 import id.adiputera.demo.cms.storefront.exception.ResourceNotFoundException;
@@ -28,14 +29,17 @@ public class PageService {
      * Retrieves a page DTO by its slug.
      *
      * @param slug The slug of the page to retrieve.
+     * @param isEdit True if fetching for live edit (staged catalog).
      * @return The mapped PageDTO.
      */
-    @Cacheable(value = "pages", key = "#slug")
+    @Cacheable(value = "pages", key = "#slug", condition = "!#isEdit")
     @Transactional(readOnly = true)
-    public PageDTO getPageBySlug(String slug) {
-        log.debug("Fetching page with slug: {}", slug);
+    public PageDTO getPageBySlug(String slug, boolean isEdit) {
+        log.debug("Fetching page with slug: {}, edit: {}", slug, isEdit);
 
-        Page page = pageRepository.findBySlugWithRelations(slug)
+        CatalogVersion version = isEdit ? CatalogVersion.STAGED : CatalogVersion.ONLINE;
+
+        Page page = pageRepository.findBySlugWithRelations(slug, version)
                 .orElseThrow(() -> new ResourceNotFoundException("Page", slug));
 
         return entityMapper.toPageDTO(page, true);

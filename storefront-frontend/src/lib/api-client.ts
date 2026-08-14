@@ -43,9 +43,10 @@ class ApiClient {
   /**
    * Fetch a page by slug
    */
-  async getPageBySlug(slug: string): Promise<Page> {
+  async getPageBySlug(slug: string, isEdit: boolean = false): Promise<Page> {
     const normalizedSlug = slug.startsWith('/') ? slug.substring(1) : slug;
-    const url = normalizedSlug === '' ? `${this.baseUrl}/pages/index` : `${this.baseUrl}/pages/${normalizedSlug}`;
+    const baseUrlPath = normalizedSlug === '' ? `${this.baseUrl}/pages/index` : `${this.baseUrl}/pages/${normalizedSlug}`;
+    const url = `${baseUrlPath}?edit=${isEdit}`;
     
     const response = await fetch(url, {
       method: 'GET',
@@ -61,13 +62,13 @@ class ApiClient {
   /**
    * Fetch multiple slots with their components
    */
-  async getSlotsByIds(slotIds: number[]): Promise<{ slots: Slot[] }> {
+  async getSlotsByIds(ids: number[], isEdit: boolean = false): Promise<{ slots: Slot[] }> {
     const response = await fetch(`${this.baseUrl}/slots/details`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ slotIds }),
+      body: JSON.stringify({ slotIds: ids, edit: isEdit }),
       cache: 'no-store',
     });
     
